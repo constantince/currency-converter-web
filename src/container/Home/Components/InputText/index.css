@@ -1,0 +1,27 @@
+.input-text {
+    width: 80%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.input-text button {
+    width: 70px;
+    background-color: #E2e2e2;
+    font-weight: bold;
+    border: 0;
+    height: 40px;
+    border-radius: 5px 0px 0px 5px;
+    color: #4F6D7A;
+    font-size: 18px;
+    outline: none;
+}
+
+.input-text input {
+    flex: 1;
+    height: 40px;
+    border: 0;
+    padding: 0;
+    border-left: 1px solid #c4c4c4;
+    border-radius: 0 5px 5px 0;
+    font-size: 18px;
+}
