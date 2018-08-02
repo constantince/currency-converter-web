@@ -5,7 +5,7 @@
 }
 
 .input-text button {
-    width: 70px;
+    width: 80px;
     background-color: #E2e2e2;
     font-weight: bold;
     border: 0;
@@ -24,4 +24,5 @@
     border-left: 1px solid #c4c4c4;
     border-radius: 0 5px 5px 0;
     font-size: 18px;
+    padding-left: 5px;
 }

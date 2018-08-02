@@ -5,9 +5,15 @@
     background: url(./images/background@3x.png) no-repeat center / 80%;
     height: 200px;
     width: 200px;
+    transition: all .3s;
+}
+
+.logo.active {
+    height: 100px;
+    width: 100px;
 }
 
 .logo .img-logo {
     width: 60%;
-    height: 50%;
+    height: 45%;
 }

@@ -1,0 +1,15 @@
+.fast-list {
+    overflow-x: hidden;
+}
+.fast-list li {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E2e2e2;
+}
+
+.fast-list .left-component {
+    align-items: center;
+    flex: 1;
+    padding-left: 10px;
+}
