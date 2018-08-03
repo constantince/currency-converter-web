@@ -52,7 +52,7 @@ class Home extends Component {
                 <img src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
-            <InputText onClick={() => push(`home/currencylist/${baseCurrency}`)} text={baseCurrency} value={amount} />
+            <InputText onClick={() => push('home/currencylist/baseCurrency')} text={baseCurrency} value={amount} />
             <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={rate * amount} />
             <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
             <TouchFeedBack className="reverse">

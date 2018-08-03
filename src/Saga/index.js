@@ -1,7 +1,7 @@
 import{select, takeLatest, put, call, all} from "redux-saga/effects";
 
 const _fetch = (base) => {
-    return fetch(`latest?base=${base}`).then(
+    return fetch(`http://fixer.handlebarlabs.com/latest?base=${base}`).then(
       res => res.json()
     );
 }

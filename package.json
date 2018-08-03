@@ -1,7 +1,6 @@
 {
   "name": "New-wechat",
   "version": "0.1.0",
-  "proxy": "http://fixer.handlebarlabs.com/",
   "private": true,
   "homepage": "",
   "combintionJs": [

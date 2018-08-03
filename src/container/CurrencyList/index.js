@@ -34,7 +34,12 @@ class CurrencyList extends Component {
                 <FastList 
                     data={currencies}
                     renderRow={(row) => <li onClick={() => {
+                        if(currency === 'baseCurrency') {//change quote currency
+                            dispatch({type: 'GET_CURRENCY', value: row});
+                        } else {
                             dispatch({type: 'CHANGE_QUOTE_CURRENCY', currency: row});
+                        }
+                            
                             history.replace('/home');
                         }}>
                         <div className="left-component">{row}</div>
