@@ -30,7 +30,7 @@ export default (state = data, action) => {
 
     case CHANGE_BASE_CURRENCY_START:
       return drop(state)
-        .set(`currencies.conversions.${[action.currency]}.isFetching`, true)
+        .set(`currencies.conversions.${[action.currency]}.isFetching`, 123)
         .value();
 
     case FETCH_ERROR:

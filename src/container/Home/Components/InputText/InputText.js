@@ -5,14 +5,15 @@ export default class InputText extends Component {
     static propTyeps = {
         text: PropTypes.string,
         disabled: PropTypes.bool,
-        value: PropTypes.string
+        value: PropTypes.string,
+        onChange: PropTypes.func
     }
 
     render() {
         const { text, disabled, value, onClick } = this.props;
         return <div className="input-text">
             <button onClick={(e) => {onClick(); e.stopPropagation(); }}>{text}</button>
-            <input disabled={disabled} value={value} />
+            <input disabled={disabled} onChange={this.props.onChange} value={value} />
         </div>
     }
 }

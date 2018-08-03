@@ -43,7 +43,8 @@ class Home extends Component {
 
     render() {
         const {history: {push}, routes, amount, baseCurrency,
-    quoteCurrency, conversions, themes, isFetching} = this.props;
+    quoteCurrency, conversions, themes, dispatch} = this.props;
+        const isFetching = conversions[baseCurrency].isFetching
         const rate = conversions[baseCurrency].rates[quoteCurrency];
         const date = conversions[baseCurrency].date;
         return <div className="page">
@@ -52,8 +53,8 @@ class Home extends Component {
                 <img src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
-            <InputText onClick={() => push('home/currencylist/baseCurrency')} text={baseCurrency} value={amount} />
-            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={rate * amount} />
+            <InputText onClick={() => push('home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
+            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : rate * amount} />
             <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
             <TouchFeedBack className="reverse">
                 <img src={require('./images/icon@3x.png')} />
