@@ -5,14 +5,14 @@ import Text from './Components/Text';
 import './index.css';
 import TouchFeedBack from './../../Components/TouchFeedBack';
 import {RouteWithSubRoutes} from '../../utils';
-
+import {connect} from 'react-redux';
 
 const CURRENCY = 'USD';
-const QUOTE = 'RMB';
+const QUOTE = 'CNY';
 const RATE = '6.83';
 const DATE = '2018-08-02'
 
-export default class Home extends Component {
+class Home extends Component {
 
     state = {
         keyBoardStatus: ''
@@ -30,6 +30,8 @@ export default class Home extends Component {
                 keyBoardStatus: ''
             });
         });
+
+        this.props.dispatch({type: 'GET_CURRENCY', value: 'USD'})
     }
 
     componentWillUnmount() {
@@ -40,16 +42,19 @@ export default class Home extends Component {
     
 
     render() {
-        const {history: {push}, routes} = this.props;
+        const {history: {push}, routes, amount, baseCurrency,
+    quoteCurrency, conversions, themes, isFetching} = this.props;
+        const rate = conversions[baseCurrency].rates[quoteCurrency];
+        const date = conversions[baseCurrency].date;
         return <div className="page">
         <div className="route-1 home">
             <TouchFeedBack className="gear" onClick={() => push('Setting')}>
                 <img src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
-            <InputText onClick={() => push('home/currencylist')} text={CURRENCY} value={1} />
-            <InputText onClick={() => push('home/currencylist')} text={QUOTE} disabled={true} value={RATE} />
-            <Text date={DATE} rate={RATE}  currency={CURRENCY} quote={QUOTE}  />
+            <InputText onClick={() => push(`home/currencylist/${baseCurrency}`)} text={baseCurrency} value={amount} />
+            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={rate * amount} />
+            <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
             <TouchFeedBack className="reverse">
                 <img src={require('./images/icon@3x.png')} />
                 <p>Reverse Currencies</p>
@@ -59,3 +64,15 @@ export default class Home extends Component {
         </div>;
     }
 }
+
+const mapStateToProps = (state) => ({
+    amount: state.currencies.amount,
+    baseCurrency: state.currencies.baseCurrency,
+    quoteCurrency: state.currencies.quoteCurrency,
+    conversions: state.currencies.conversions,
+    themes: state.themes,
+    isFetching: state.currencies.conversions.isFetching
+
+})
+
+export default connect(mapStateToProps)(Home);

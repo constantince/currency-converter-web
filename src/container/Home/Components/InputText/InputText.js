@@ -12,7 +12,7 @@ export default class InputText extends Component {
         const { text, disabled, value, onClick } = this.props;
         return <div className="input-text">
             <button onClick={(e) => {onClick(); e.stopPropagation(); }}>{text}</button>
-            <input disabled={disabled} defaultValue={value} />
+            <input disabled={disabled} value={value} />
         </div>
     }
 }

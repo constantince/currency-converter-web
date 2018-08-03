@@ -6,7 +6,7 @@ const routesConfig = [{
     path: '/home',
     component: Home,
     routes: [{
-        path: '/home/currencylist',
+        path: '/home/currencylist/:currency',
         component: CurrencyList
     }]
 },{

@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import FastList from '../../Components/FastList';
 import currencies from '../../Data/currencies';
 import { CSSTransition } from 'react-transition-group';
+import {connect} from 'react-redux';
 import './index.css';
 
-export default class CurrencyList extends Component {
+class CurrencyList extends Component {
+
+    static propTypes = {
+        source: PropTypes.object
+    }
 
     state = {
         show: false
@@ -18,7 +24,7 @@ export default class CurrencyList extends Component {
 
 
     render() {
-        const {history} = this.props;
+        const {history, match: {params: {currency}}, dispatch} = this.props;
         return <div className="currency-list">
         <CSSTransition
             in={this.state.show}
@@ -27,7 +33,10 @@ export default class CurrencyList extends Component {
             unmountOnExit>
                 <FastList 
                     data={currencies}
-                    renderRow={(row) => <li onClick={() => history.replace('/home')}>
+                    renderRow={(row) => <li onClick={() => {
+                            dispatch({type: 'CHANGE_QUOTE_CURRENCY', currency: row});
+                            history.replace('/home');
+                        }}>
                         <div className="left-component">{row}</div>
                     </li>}
                 />
@@ -35,3 +44,9 @@ export default class CurrencyList extends Component {
     </div>
     }
 }
+
+const mapStateToProps = (state, ownPorps) => ({
+    source: state.currencies.conversions
+})
+
+export default connect(mapStateToProps)(CurrencyList);
