@@ -11,9 +11,9 @@ class App extends Component {
     return <Router>
       <Provider store={store}>
         <div className="layout-core">
-          {/* <Switch> */}
+          <Switch>
             {Routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-          {/* </Switch> */}
+          </Switch>
         </div>
       </Provider>
   </Router>
