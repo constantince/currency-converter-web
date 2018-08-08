@@ -30,8 +30,8 @@ class Home extends Component {
                 keyBoardStatus: ''
             });
         });
-
-        this.props.dispatch({type: 'GET_CURRENCY', value: 'USD'})
+        //如果初始化过数据，则无需再次请求了。web与native的渲染机制是不一样的
+        !this.props.initialed && this.props.dispatch({type: 'GET_CURRENCY', value: 'USD'})
     }
 
     componentWillUnmount() {
@@ -43,12 +43,12 @@ class Home extends Component {
 
     render() {
         const {history: {push}, routes, amount, baseCurrency,
-    quoteCurrency, conversions, themes, dispatch} = this.props;
+        quoteCurrency, conversions, themes, dispatch} = this.props;
         const isFetching = conversions[baseCurrency].isFetching
         const rate = conversions[baseCurrency].rates[quoteCurrency];
         const date = conversions[baseCurrency].date;
         return <div className="page">
-        <div className="route-1 home">
+        <div className="route-1 home" style={{backgroundColor: themes}}>
             <TouchFeedBack className="gear" onClick={() => push('Setting')}>
                 <img src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
@@ -56,7 +56,9 @@ class Home extends Component {
             <InputText onClick={() => push('home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
             <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : rate * amount} />
             <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
-            <TouchFeedBack className="reverse">
+            <TouchFeedBack className="reverse" onClick={() => {
+                dispatch({type: 'GET_CURRENCY', value: quoteCurrency, other: baseCurrency})
+            }}>
                 <img src={require('./images/icon@3x.png')} />
                 <p>Reverse Currencies</p>
             </TouchFeedBack>
@@ -71,8 +73,9 @@ const mapStateToProps = (state) => ({
     baseCurrency: state.currencies.baseCurrency,
     quoteCurrency: state.currencies.quoteCurrency,
     conversions: state.currencies.conversions,
-    themes: state.themes,
-    isFetching: state.currencies.conversions.isFetching
+    themes: state.themes.primaryColor,
+    isFetching: state.currencies.conversions.isFetching,
+    initialed: state.initialed,
 
 })
 
