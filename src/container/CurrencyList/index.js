@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import FastList from '../../Components/FastList';
 import currencies from '../../Data/currencies';
 import { CSSTransition } from 'react-transition-group';
 import {connect} from 'react-redux';
 import './index.css';
-
-class CurrencyList extends Component {
+import BaseView from '../Base';
+class CurrencyList extends BaseView {
 
     static propTypes = {
         source: PropTypes.object
@@ -16,12 +16,17 @@ class CurrencyList extends Component {
         show: false
     }
 
+    get title() {
+        return this.props.match.params.currency;
+    }
+    
+    nextPageTitle = "Home";
+
     componentDidMount() {
         this.setState({
             show: true
         })
     }
-
 
     render() {
         const {history, match: {params: {currency}}, dispatch} = this.props;

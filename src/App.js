@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-// import { Router, Route } from 'react-router'
 import Routes from './config/routes';
-// import createHashHistory from 'history/createHashHistory';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// const history = createHashHistory();
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { applyMiddleware, createStore} from 'redux';
 import { Provider } from "react-redux";
 import {createLogger} from 'redux-logger';

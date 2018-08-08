@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Logo from './Components/Logo';
 import InputText from './Components/InputText';
 import Text from './Components/Text';
@@ -6,19 +6,18 @@ import './index.css';
 import TouchFeedBack from './../../Components/TouchFeedBack';
 import {RouteWithSubRoutes} from '../../utils';
 import {connect} from 'react-redux';
+import BaseView from '../Base';
 
-const CURRENCY = 'USD';
-const QUOTE = 'CNY';
-const RATE = '6.83';
-const DATE = '2018-08-02'
-
-class Home extends Component {
+class Home extends BaseView {
 
     state = {
         keyBoardStatus: ''
     }
 
+    title = "Home";
+
     componentWillMount() {
+        super.componentWillMount();
         document.addEventListener('focusin',() => {
             this.setState({
                 keyBoardStatus: 'active'
@@ -45,12 +44,12 @@ class Home extends Component {
         const {history: {push}, routes, amount, baseCurrency,
         quoteCurrency, conversions, themes, dispatch} = this.props;
         const isFetching = conversions[baseCurrency].isFetching
-        const rate = conversions[baseCurrency].rates[quoteCurrency];
+        const rate = conversions[baseCurrency].rates[quoteCurrency] || 1;
         const date = conversions[baseCurrency].date;
         return <div className="page">
         <div className="route-1 home" style={{backgroundColor: themes}}>
             <TouchFeedBack className="gear" onClick={() => push('Setting')}>
-                <img src={require('./images/gear@3x.png')} />
+                <img alt="" src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
             <InputText onClick={() => push('home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
@@ -59,7 +58,7 @@ class Home extends Component {
             <TouchFeedBack className="reverse" onClick={() => {
                 dispatch({type: 'GET_CURRENCY', value: quoteCurrency, other: baseCurrency})
             }}>
-                <img src={require('./images/icon@3x.png')} />
+                <img alt="" src={require('./images/icon@3x.png')} />
                 <p>Reverse Currencies</p>
             </TouchFeedBack>
         </div>
