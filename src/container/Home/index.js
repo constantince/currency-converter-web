@@ -53,8 +53,8 @@ class Home extends BaseView {
                 <img alt="" src={require('./images/gear@3x.png')} />
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
-            <InputText onClick={() => push('home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
-            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : !!quoteAmount ? quoteAmount : '( $ _ $ )'} />
+            <InputText onClick={() => push('/home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
+            <InputText onClick={() => push('/home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : !!quoteAmount ? quoteAmount : '( $ _ $ )'} />
             <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
             <TouchFeedBack onClick={() => {
                 dispatch({type: 'GET_CURRENCY', value: quoteCurrency, other: baseCurrency})

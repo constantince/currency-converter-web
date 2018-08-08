@@ -13,7 +13,7 @@ const routesConfig = [{
     path: '/theme',
     component: Theme
 },{
-    path: '/setting',
+    path: '/Setting',
     component: Setting,
 }];
 

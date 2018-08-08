@@ -16,7 +16,7 @@ class Theme extends BaseView {
             data={Colors}
             renderRow={(row) => <li onClick={() => {
                 dispatch({type: 'CHANGE_THEME_COLOR', color: row.color})
-                history.push('home')
+                history.push('/home')
             }}>
                 <div className="left-component">{row.text}</div>
                 <div className="right-color-block" style={{backgroundColor: row.color}}></div>
@@ -25,18 +25,5 @@ class Theme extends BaseView {
         </div>
     }
 }
-
-// const Theme = ({history, dispatch}) => <div className="theme">
-// <FastList 
-//     data={Colors}
-//     renderRow={(row) => <li onClick={() => {
-//         dispatch({type: 'CHANGE_THEME_COLOR', color: row.color})
-//         history.push('home')
-//     }}>
-//         <div className="left-component">{row.text}</div>
-//         <div className="right-color-block" style={{backgroundColor: row.color}}></div>
-//     </li>}
-// />
-// </div>;
 
 export default connect()(Theme);

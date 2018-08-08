@@ -19,7 +19,7 @@ class CurrencyList extends BaseView {
     get title() {
         return this.props.match.params.currency;
     }
-    
+
     nextPageTitle = "Home";
 
     componentDidMount() {
