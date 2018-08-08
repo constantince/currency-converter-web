@@ -16,11 +16,9 @@ export default (state = data, action) => {
         .set(`currencies.baseCurrency`, action.currency)
         .set("currencies.conversions", {[action.currency]: action.data, isFetching: false})
         .value();
-      break;
 
     case CHANGE_QUOTE_CURRENCY:
       return drop(state).set(`currencies.quoteCurrency`, action.currency).value();
-      break;
 
     case CHANGE_BASE_AMOUNT:
       return drop(state).set("currencies.amount", action.amount).value();
@@ -38,7 +36,8 @@ export default (state = data, action) => {
       return drop(state)
         .merge(`currencies`, {error: action.error})
         .value();
-  }
 
-  return state;
+    default:
+      return state;
+  }
 };

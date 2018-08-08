@@ -46,6 +46,7 @@ class Home extends BaseView {
         const isFetching = conversions[baseCurrency].isFetching
         const rate = conversions[baseCurrency].rates[quoteCurrency] || 1;
         const date = conversions[baseCurrency].date;
+        const quoteAmount = parseFloat(rate * amount).toFixed(2);
         return <div className="page">
         <div className="route-1 home" style={{backgroundColor: themes}}>
             <TouchFeedBack className="gear" onClick={() => push('Setting')}>
@@ -53,13 +54,15 @@ class Home extends BaseView {
             </TouchFeedBack>
             <Logo status={this.state.keyBoardStatus} />
             <InputText onClick={() => push('home/currencylist/baseCurrency')} onChange={(e) => dispatch({type: 'CHANGE_BASE_AMOUNT', amount: e.target.value})} text={baseCurrency} value={amount} />
-            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : rate * amount} />
+            <InputText onClick={() => push('home/currencylist/quoteCurrency')} text={quoteCurrency} disabled={true} value={isFetching ? '...' : !!quoteAmount ? quoteAmount : '( $ _ $ )'} />
             <Text date={date} rate={rate}  currency={baseCurrency} quote={quoteCurrency}  />
-            <TouchFeedBack className="reverse" onClick={() => {
+            <TouchFeedBack onClick={() => {
                 dispatch({type: 'GET_CURRENCY', value: quoteCurrency, other: baseCurrency})
             }}>
-                <img alt="" src={require('./images/icon@3x.png')} />
-                <p>Reverse Currencies</p>
+                <div className="reverse">
+                    <img alt="" src={require('./images/icon@3x.png')} />
+                    <p>Reverse Currencies</p>
+                </div>
             </TouchFeedBack>
         </div>
             {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}

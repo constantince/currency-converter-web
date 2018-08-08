@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Routes from './config/routes';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import { applyMiddleware, createStore} from 'redux';
 import { Provider } from "react-redux";
 import {createLogger} from 'redux-logger';
