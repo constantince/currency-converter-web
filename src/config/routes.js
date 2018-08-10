@@ -2,7 +2,7 @@ import Home from '../container/Home';
 import Theme from '../container/Theme';
 import CurrencyList from '../container/CurrencyList';
 import Setting from '../container/Setting';
-import Index from '../container/Index'
+import Index from '../container/Index';
 const routesConfig = [{
     path: '/',
     exact: true,
